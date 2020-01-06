@@ -44,11 +44,13 @@ resource "azurerm_network_interface" "myterraformnic" {
 }
 
 resource "azurerm_availability_set" "set" {
-  count               = 2
-  name                = "availabilitySet${count.index}"
-  location            = azurerm_resource_group.myterraformgroup.location
-  resource_group_name = azurerm_resource_group.myterraformgroup.name
-  managed             = true
+  count                        = 2
+  name                         = "availabilitySet${count.index}"
+  location                     = azurerm_resource_group.myterraformgroup.location
+  resource_group_name          = azurerm_resource_group.myterraformgroup.name
+  managed                      = true
+  platform_update_domain_count = 20
+  platform_fault_domain_count  = 3
 }
 
 resource "azurerm_virtual_machine" "vm" {
